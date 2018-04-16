@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1523857744715.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "197966380",
+    "id" : "20348892",
+    "lastKnownWriteTime" : 1523900139,
+    "last_content_update" : 1523900139668,
+    "path" : "~/github/sac/camping/each_campground.R",
+    "project_path" : "each_campground.R",
+    "properties" : {
+        "cursorPosition" : "5,2",
+        "scrollLine" : "0",
+        "tempName" : "Untitled2"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
