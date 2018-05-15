@@ -1,3 +1,14 @@
+error_list <- function(x) {
+  list(
+    campground = x, 
+    dat = data.frame(NULL), 
+    no_sites = NA_character_,
+    latitude = NA_character_, 
+    longitude = NA_character_, 
+    elevation = NA_character_
+  )  
+}
+
 # for each campground site
 # each_campground(cgrounds_urls[1], nms[1])
 each_campground <- function(url, name, ...) {
@@ -7,6 +18,7 @@ each_campground <- function(url, name, ...) {
   html2 <- xml2::read_html(res2$parse("UTF-8"))
   
   table_glance <- xml_find_all(html2, '//table[contains(@summary, "Glance")]')
+  if (length(table_glance) == 0) return(error_list(name))
   table_glance_df <- rvest::html_table(table_glance)[[1]]
   
   no_site <- xml_text(xml_find_all(html2, '//table//tr//text()[contains(., "single site(")]'))

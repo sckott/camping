@@ -6,16 +6,22 @@ top_level_campground <- function(url, ...) {
   res <- cli$get()
   res$raise_for_status()
   html1 <- xml2::read_html(res$parse("UTF-8"))
-  xml2::write_html(html1, "stuff.html")
+  # xml2::write_html(html1, "stuff.html")
   cgrounds <- xml_find_all(html1, '//a[contains(text(), "Campground")]')
   nms <- unname(vapply(xml_text(cgrounds), function(z) {
     if (grepl(":", z)) strsplit(z, ":")[[1]][[2]] else z
   }, ""))
   cgrounds_hrefs <- xml_attr(cgrounds, "href")
   url_pref <- "https://www.fs.usda.gov"
-  cgrounds_urls <- paste0(url_pref, cgrounds_hrefs)
+  cgrounds_urls <- unname(vapply(cgrounds_hrefs, function(x) {
+    if (grepl("https?", x)) x else paste0(url_pref, x)
+  }, ""))
   
+  # each_campground_safe <- plyr::try_default(each_campground, error_list)
   all_campgrounds <- unname(Map(each_campground, cgrounds_urls, nms))
+  
+  # remove those that don't have data
+  all_campgrounds <- Filter(function(x) NROW(x$dat) > 0, all_campgrounds)
   
   # combine them
   ddf <- tbl_df(bind_rows(lapply(all_campgrounds, function(z) {
