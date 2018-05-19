@@ -24,7 +24,7 @@ top_level_campground <- function(url, ...) {
   all_campgrounds <- Filter(function(x) NROW(x$dat) > 0, all_campgrounds)
   
   # combine them
-  ddf <- tbl_df(bind_rows(lapply(all_campgrounds, function(z) {
+  ddf <- tbl_df(bind_rows(Map(function(z, w) {
     z$no_sites <- unique(z$no_sites)
     if (length(z$no_sites) > 1) z$no_sites <- z$no_sites[1]
     df <- data.frame(str_trim(z$campground), 
@@ -41,8 +41,9 @@ top_level_campground <- function(url, ...) {
     if (!is.null(df$Restroom)) {
       df$Restroom <- gsub("\\(.+", "", df$Restroom)  
     }
+    df$url <- w
     df
-  })))
+  }, all_campgrounds, cgrounds_urls)))
   # readr::write_csv(all_campgrounds_df, "all_campgrounds_df.csv")
   
   return(ddf)

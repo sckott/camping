@@ -1,0 +1,10 @@
+name: camping
+title:
+username:
+account: ropensci
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 345613
+bundleId: 1382147
+url: https://ropensci.shinyapps.io/camping/
+when: 1526743273.46939

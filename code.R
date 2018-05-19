@@ -13,19 +13,26 @@ source("helpers.R")
 
 gp <- top_level_campground(url = gifford_pinchot) # FIXME
 gp <- clean_categories(gp)
+readr::write_csv(gp, "data/gifford_pinchot.csv")
 mh <- top_level_campground(mthood)
 mh <- clean_categories(mh)
+readr::write_csv(mh, "data/mthood.csv")
 wm <- top_level_campground(url = williamette)
 wm <- clean_categories(wm)
+readr::write_csv(wm, "data/williamette.csv")
 oc <- top_level_campground(ochoco)
 oc <- clean_categories(oc)
-ss <- top_level_campground(siuslaw)
+readr::write_csv(oc, "data/ochoco.csv")
+ss <- top_level_campground(url = siuslaw)
 ss <- clean_categories(ss)
+readr::write_csv(ss, "data/siuslaw.csv")
 #uq <- top_level_campground(umpqua) # FIXME
 de <- top_level_campground(deschutes)
 de <- clean_categories(de)
+readr::write_csv(de, "data/deschutes.csv")
 rs <- top_level_campground(rogue_siskiyou)
 rs <- clean_categories(rs)
+readr::write_csv(rs, "data/rogue_siskiyou.csv")
 
 # map
 tp <- de
